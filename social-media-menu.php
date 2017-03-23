@@ -11,45 +11,72 @@
 
 class simpleSocialMenu extends WP_Widget{
     
-    private $areas = array("Facebook","Twitter","Instagram","Snapchat","Pinterest","Email");
+    private $areas = array("Facebook","Twitter","LinkedIn","Email");
 
-    function __construct(){
+    public function __construct(){
         parent::__construct('simple-social-menu','Simple Social Media Menu',array(
             'description' => 'A simple, customizable, placable menu for your social media profiles'
         ));
+    }
 
-        public function form($instance){
+    public function form($instance){
 
-            foreach($this->areas as $area){
-                if( !isset($instance[$area]) ) $instance[$area] = "";
-                
+        foreach($this->areas as $area){
+            if( !isset($instance[$area]) ) $instance[$area] = "";
+            
 ?>
-                <label for="<?php echo $this->get_field_id(); ?>">
-                    <?php echo $instance[$area]?>
-                </label>
-                <input 
-                    class="widefat" 
-                    id="<?php echo $this->get_field_id(); ?>" 
-                    name="<?php echo $this->get_field_name(); ?>" 
-                    type="text" 
-                    value="<?php echo $instance[$area]; ?>" 
-                /> 
+            <label for="<?php echo $this->get_field_id($area); ?>">
+                <?php echo $area; ?>
+            </label>
+            <input 
+                class="widefat" 
+                id="<?php echo $this->get_field_id($area); ?>" 
+                name="<?php echo $this->get_field_name($area); ?>" 
+                type="text" 
+                value="<?php echo $instance[$area]; ?>" 
+            /> 
 <?php
 
-            }
-            
         }
-
-        public function update($new_instance){
-            $toReturnInstance = array();
-            foreach($this->area as $area){
-                $toReturnInstance[$area] = !empty($new_instance[$area]) ) ? $new_instance[$area] : '';
-                //TODO: VALIDATION ON INPUTS
-            }
-            return $toReturnInstance
-        }
-
-        //TODO: implement widget method (front end) ... example  http://www.wpbeginner.com/wp-tutorials/how-to-create-a-custom-wordpress-widget/
-
+        
     }
+
+    public function update($new_instance){
+        $toReturnInstance = array();
+        foreach($this->areas as $area){
+            $toReturnInstance[$area] = !empty($new_instance[$area]) ? $new_instance[$area] : '';
+            //TODO: VALIDATION ON INPUTS
+        }
+        return $toReturnInstance;
+    }
+
+    public function widget($args, $instance){
+        echo '<div class="social-media-menu-bin">';
+            echo $args['before_widget'];
+            echo '<div class="social-links text-center"><ul class="image-list">';
+            foreach($this->areas as $name){
+                $image_path = plugin_dir_url(__FILE__) . '/img/'.$name.'.png';
+                $url = $instance[$name];
+                if(!empty($url))
+                    echo "<li><a href='$url' target='_blank'><img src='$image_path' alt='$name'/></a></li>";
+            }
+            echo '</ul></div>';
+            echo $args['after_widget'];
+        echo '</div>';
+    }
+
+    
 }
+
+function register_simpleSocialMenu(){
+    register_widget('simpleSocialMenu');
+}
+
+add_action('widgets_init', 'register_simpleSocialMenu');
+
+function register_simpleSocialMenu_styles(){
+    wp_enqueue_style('simpleSocialMenuStyle', plugin_dir_url(__FILE__).'css/style.css');
+}
+add_action('wp_enqueue_scripts','register_simpleSocialMenu_styles');
+
+?>

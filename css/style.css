@@ -1,0 +1,23 @@
+.social-media-menu-bin{
+    padding: 20px 0;
+}
+
+/********************
+ * Social menu styles
+ * *****************/
+.social-links {
+    margin: auto;
+    width:100%;
+    max-width:500px;
+}
+
+ul.image-list li{
+    display:inline;
+    padding:0 10px;
+    margin: 0 10px;
+}
+
+ul.image-list img{
+    width: 50px;
+    border-radius: 5px;
+}
