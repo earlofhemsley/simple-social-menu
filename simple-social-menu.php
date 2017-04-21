@@ -57,8 +57,12 @@ class simpleSocialMenu extends WP_Widget{
             foreach($this->areas as $name){
                 $image_path = plugin_dir_url(__FILE__) . '/img/'.$name.'.png';
                 $url = $instance[$name];
-                if(!empty($url))
-                    echo "<li><a href='$url' target='_blank'><img src='$image_path' alt='$name'/></a></li>";
+                if(!empty($url)){
+                    if($name == 'Email') 
+                        echo "<li><a href='mailto:$url'><img src='$image_path' alt='$name'/></a></li>";
+                    else
+                        echo "<li><a href='$url' target='_blank'><img src='$image_path' alt='$name'/></a></li>";
+                }
             }
             echo '</ul></div>';
             echo $args['after_widget'];
