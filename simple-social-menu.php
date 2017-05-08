@@ -12,6 +12,8 @@
 class simpleSocialMenu extends WP_Widget{
     
     private $areas = array("Facebook","Twitter","LinkedIn","Email");
+    private $alignments = array("left", "center", "right");
+    private $sizes = array("large", "small");
 
     public function __construct(){
         parent::__construct('simple-social-menu','Simple Social Media Menu',array(
@@ -21,7 +23,7 @@ class simpleSocialMenu extends WP_Widget{
 
     public function form($instance){
 
-        foreach($this->areas as $area){
+        foreach($this->areas as $area):
             if( !isset($instance[$area]) ) $instance[$area] = "";
             
 ?>
@@ -35,9 +37,24 @@ class simpleSocialMenu extends WP_Widget{
                 type="text" 
                 value="<?php echo $instance[$area]; ?>" 
             /> 
-<?php
-
+<?php   endforeach; 
+        echo sprintf("<label for='%s'>Alignment</label> <select class='widefat' id='%s' name='%s'>",
+            $this->get_field_id("alignment"),
+            $this->get_field_id("alignment"),
+            $this->get_field_name("alignment")
+        );
+        foreach($alignments as $value => $option){
+            echo sprintf("<option value=%d %s>%s</option>",
+                $value,
+                $instance["alignment"] == $value ? "selected" : "",
+                $option
+            );
         }
+        echo "</select>";
+
+        <label for="">Size</label>
+        <select></select>
+
         
     }
 
