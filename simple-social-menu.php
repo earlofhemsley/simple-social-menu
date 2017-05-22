@@ -83,9 +83,12 @@ class simpleSocialMenu extends WP_Widget{
     public function widget($args, $instance){
         echo '<div class="social-media-menu-bin">';
             echo $args['before_widget'];
-            echo '<div class="social-links text-center"><ul class="image-list">';
+            $alignClass = 'ssm-text-' . $this->alignments[$instance['alignment']]; 
+            echo "<div class='social-links $alignClass'><ul class='image-list'>";
             foreach($this->areas as $name){
-                $image_path = plugin_dir_url(__FILE__) . '/img/'.$name.'.png';
+                $filename = $name;
+                if($instance['size'] == 1) $filename = $filename . '-sm';
+                $image_path = plugin_dir_url(__FILE__) . '/img/'.$filename.'.png';
                 $url = $instance[$name];
                 if(!empty($url)){
                     if($name == 'Email') 

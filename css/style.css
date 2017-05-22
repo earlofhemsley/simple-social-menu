@@ -2,13 +2,25 @@
     padding: 20px 0;
 }
 
+.ssm-text-left{
+    text-align: left;
+}
+
+.ssm-text-center{
+    text-align: center;
+}
+
+.ssm-text-right{
+    text-align: right;
+}
+
 /********************
  * Social menu styles
  * *****************/
 .social-links {
     margin: auto;
     width:100%;
-    max-width:500px;
+    max-width:800px;
 }
 
 ul.image-list li{
