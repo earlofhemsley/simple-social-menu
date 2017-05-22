@@ -12,7 +12,7 @@
 class simpleSocialMenu extends WP_Widget{
     
     private $areas = array("Facebook","Twitter","LinkedIn","Email");
-    private $alignments = array("left", "center", "right");
+    private $alignments = array("center", "left", "right");
     private $sizes = array("large", "small");
 
     public function __construct(){
@@ -37,13 +37,14 @@ class simpleSocialMenu extends WP_Widget{
                 type="text" 
                 value="<?php echo $instance[$area]; ?>" 
             /> 
+
 <?php   endforeach; 
         echo sprintf("<label for='%s'>Alignment</label> <select class='widefat' id='%s' name='%s'>",
             $this->get_field_id("alignment"),
             $this->get_field_id("alignment"),
             $this->get_field_name("alignment")
         );
-        foreach($alignments as $value => $option){
+        foreach($this->alignments as $value => $option){
             echo sprintf("<option value=%d %s>%s</option>",
                 $value,
                 $instance["alignment"] == $value ? "selected" : "",
@@ -52,18 +53,30 @@ class simpleSocialMenu extends WP_Widget{
         }
         echo "</select>";
 
-        <label for="">Size</label>
-        <select></select>
-
-        
+        echo sprintf("<label for='%s'>Size</label><select class='widefat' id='%s' name='%s'>",
+            $this->get_field_id('size'),
+            $this->get_field_id('size'),
+            $this->get_field_name('size')
+        );
+        foreach($this->sizes as $value => $size){
+            echo sprintf("<option value=%d %s>%s</option>",
+                $value, 
+                $instance["size"] == $value ? "selected" : "",
+                $size
+            );
+        }
+        echo '</select>';
     }
 
     public function update($new_instance){
+        var_dump($new_instance);
         $toReturnInstance = array();
         foreach($this->areas as $area){
             $toReturnInstance[$area] = !empty($new_instance[$area]) ? $new_instance[$area] : '';
             //TODO: VALIDATION ON INPUTS
         }
+        $toReturnInstance["alignment"] = $new_instance["alignment"];
+        $toReturnInstance["size"] = $new_instance["size"];
         return $toReturnInstance;
     }
 
