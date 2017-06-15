@@ -30,6 +30,12 @@ ul.image-list li{
 }
 
 ul.image-list img{
-    width: 50px;
+    width: 30px;
     border-radius: 5px;
+}
+
+@media (min-width: 768px){
+    ul.image-list img{
+        width: 50px;
+    }
 }
