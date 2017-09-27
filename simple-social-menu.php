@@ -68,7 +68,7 @@ class simpleSocialMenu extends WP_Widget{
         echo '</select>';
     }
 
-    public function update($new_instance){
+    public function update($new_instance, $old_instance){
         var_dump($new_instance);
         $toReturnInstance = array();
         foreach($this->areas as $area){
