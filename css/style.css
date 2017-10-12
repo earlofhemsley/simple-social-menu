@@ -6,7 +6,8 @@ Plugin version: 1.0
 */
 
 .social-media-menu-bin{
-    padding: 20px 0;
+    padding: 10px 0;
+    margin: 10px 0;
 }
 
 .ssm-text-left{
@@ -29,16 +30,38 @@ Plugin version: 1.0
     width:100%;
     max-width:800px;
 }
+ul.image-list{
+    margin:0;
+    padding:0;
+}
 
 ul.image-list li{
     display:inline;
+}
+
+ul.image-list.image-list-large li{
     padding:0 10px;
     margin: 0 10px;
+}
+
+ul.image-list.image-list-small li{
+    padding:0 5px;
+    margin: 0 5px;
+}
+
+ul.image-list.image-list-tiny li{
+    padding:0 2px;
+    margin: 0 2px;
 }
 
 ul.image-list img{
     width: 30px;
     border-radius: 5px;
+}
+
+ul.image-list.image-list-tiny img{
+    width: 20px;
+    border-radius: 3px;
 }
 
 @media (min-width: 768px){

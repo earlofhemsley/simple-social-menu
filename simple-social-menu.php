@@ -11,9 +11,9 @@
 
 class simpleSocialMenu extends WP_Widget{
     
-    private $areas = array("Facebook","Twitter","LinkedIn","Email");
+    private $areas = array("Facebook","Twitter","LinkedIn","YouTube","Pinterest","Etsy","Craftsy","Email");
     private $alignments = array("center", "left", "right");
-    private $sizes = array("large", "small");
+    private $sizes = array("large", "small", "tiny");
 
     public function __construct(){
         parent::__construct('simple-social-menu','Simple Social Media Menu',array(
@@ -84,10 +84,11 @@ class simpleSocialMenu extends WP_Widget{
         echo '<div class="social-media-menu-bin">';
             echo $args['before_widget'];
             $alignClass = 'ssm-text-' . $this->alignments[$instance['alignment']]; 
-            echo "<div class='social-links $alignClass'><ul class='image-list'>";
+            $listClass = 'image-list-' . $this->sizes[$instance['size']];
+            echo "<div class='social-links $alignClass'><ul class='image-list $listClass'>";
             foreach($this->areas as $name){
                 $filename = $name;
-                if($instance['size'] == 1) $filename = $filename . '-sm';
+                if($this->sizes[$instance['size']] == 'small') $filename = $filename . '-sm';
                 $image_path = plugin_dir_url(__FILE__) . '/img/'.$filename.'.png';
                 $url = $instance[$name];
                 if(!empty($url)){
