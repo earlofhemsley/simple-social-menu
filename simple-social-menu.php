@@ -11,7 +11,7 @@
 
 class simpleSocialMenu extends WP_Widget{
     
-    private $areas = array("Facebook","Twitter","LinkedIn","YouTube","Pinterest","Etsy","Craftsy","Email");
+    private $areas = array("Facebook","Twitter","Instagram","LinkedIn","YouTube","Pinterest","Etsy","Craftsy","Email");
     private $alignments = array("center", "left", "right");
     private $sizes = array("large", "small", "tiny");
 
