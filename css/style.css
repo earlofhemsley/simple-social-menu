@@ -28,7 +28,8 @@ Plugin version: 1.0
 .social-links {
     margin: auto;
     width:100%;
-    max-width:800px;
+    max-width:1000px;
+    line-height:50px;
 }
 ul.image-list{
     margin:0;
@@ -36,7 +37,7 @@ ul.image-list{
 }
 
 ul.image-list li{
-    display:inline;
+    display:inline-block;
 }
 
 ul.image-list.image-list-large li{
